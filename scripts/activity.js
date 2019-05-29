@@ -27,11 +27,16 @@ $( document ).ready(function() {
   }
 
   function flipCardDown(card) {
-    $(card).removeClass("flipped");
+    $(card).find(".cross").fadeIn().delay(1000).fadeOut(function() {
+      $(card).removeClass("flipped");
+    });
+    // $(card).removeClass("flipped");
   }
 
   function markCardComplete(card) {
-    $(card).addClass("complete");
+    $(card).find(".checkmark").fadeIn().delay(1000).fadeOut(function() {
+      $(card).addClass("complete");
+    });
   }
 
   function cardsMatch(cardList) {

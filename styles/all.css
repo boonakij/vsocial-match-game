@@ -16,6 +16,7 @@ html, body {
 }
 
 .card-outer {
+  position: relative;
   background-color: transparent;
   width: 21vw;
   height: 14vw;
@@ -70,4 +71,26 @@ html, body {
 .complete {
   transition: 1s all;
   opacity: 0.5;
+}
+
+.checkmark, .cross {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+  z-index: 10;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.checkmark {
+  background-image: url("../images/checkmark.png");
+}
+
+.cross {
+  background-image: url("../images/cross.png");
 }
