@@ -51,6 +51,10 @@ html, body {
 .card-front {
   background-color: #bbb;
   color: black;
+  background-image: url("../images/cardback.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Style the back side */
@@ -58,4 +62,8 @@ html, body {
   background-color: dodgerblue;
   color: white;
   transform: rotateY(180deg);
+  background-image: url("../images/cardback.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
