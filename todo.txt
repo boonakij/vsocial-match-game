@@ -3,3 +3,4 @@
 - Ending game / restarting
 - Feedback on cards
 - Score tracker / card tracker
+- Scaling of cards
