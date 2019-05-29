@@ -1,21 +1,38 @@
 //Created by Boon and Brady
-var cards = document.getElementsByClassName('card-back-content');
+var cards= document.getElementsByClassName('card-outer');
 
 //Terms to populate with
-let terms = []
-for(var i = 0; i < 6; i++){
-  terms.push('dog', 'cat');
-};
+let dict = new Map();
 
+dict.set('dog',"./images/dog.jpeg")
+    .set('cat',"./images/cat.jpeg");
+
+//HardCoded, come back to fix later
+let terms = ['dog','dog','dog','dog','dog','dog','cat','cat','cat','cat','cat','cat',];
+
+console.log(dict);
+console.log(terms);
+
+//Random loading of terms,
 //Random loading of temrms,
 window.onload = function(){
  for(let card of cards){
-   let int = Math.floor(Math.random() * terms.length);
-   $(card).html(terms[int]);
+   let int = Math.floor(Math.random() * terms.length); //HardCode Value)
+   console.log(terms[int])
+   $(card).find(".card-back-content").html(terms[int]);
    terms.splice(int,1);
  }
+ ImageAssignment();
 };
 
+let ImageAssignment = function(){
+  for(let card of cards){
+    let card_back = card.getElementsByClassName('card-back-content');
+    console.log(dict.get($(card_back).html()));
+    $(card).find(".card-back").css("background-image", "url(" + dict.get($(card_back).html()) + ")");
+    console.log($(card).find(".card-back").css("background-image"));
+  }
+};
 
 $( document ).ready(function() {
   var cardsFlipped = []
