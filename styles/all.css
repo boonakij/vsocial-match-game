@@ -3,6 +3,7 @@ html, body {
   height: 100%;
   margin: 0px;
   padding: 0px;
+  font-family: "Segoe UI";
 }
 
 .card-container {
@@ -62,12 +63,28 @@ html, body {
 
 /* Style the back side */
 .card-back {
+  position: relative;
   color: white;
   transform: rotateY(180deg);
   background-image: url("../images/cardback.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.card-front-content {
+  display: none;
+}
+
+.card-back-content {
+  position: absolute;
+  width: 50%;
+  height: 60px;
+  font-size: 6vw;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  line-height: 60px
 }
 
 .complete {
