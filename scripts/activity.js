@@ -1,39 +1,66 @@
 //Created by Boon and Brady
+
+function Shuffle(array) {//Shuffle function borrowed from Stack Overflow
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+};
+
+let ImageAssignment = function(card, key){ //Assignment of image to card based on key provided
+    $(card).find(".card-back-content").html('');
+    let card_back = card.getElementsByClassName('card-back-content');
+    $(card).find(".card-back").css("background-image", "url(" + dict.get(key) + ")");
+};
+
+let KeyListCreation = function(dict){ //Creation of list of keys based on dictionary
+  let keys = new Array();
+  for(let key of dict.keys()){
+    keys.push(key);
+  }
+  return keys;
+};
+
 var cards= document.getElementsByClassName('card-outer');
 
 //Terms to populate with
 let dict = new Map();
-
 dict.set('dog',"./images/dog.jpeg")
     .set('cat',"./images/cat.jpeg");
 
-//HardCoded, come back to fix later
-let terms = ['dog','dog','dog','dog','dog','dog','cat','cat','cat','cat','cat','cat',];
 
-console.log(dict);
-console.log(terms);
+let n = prompt("How many cards would you like to play with?");
+n = 12 //Hardcode
+
+let random = new Array();//Creation of random array to distribute
+for(let i = 0; i < n; i++){
+  random.push(i);
+};
+Shuffle(random);
+
+let keys = KeyListCreation(dict); //creation of list of keys
 
 //Random loading of terms,
-//Random loading of temrms,
 window.onload = function(){
- for(let card of cards){
-   let int = Math.floor(Math.random() * terms.length); //HardCode Value)
-   console.log(terms[int])
-   $(card).find(".card-back-content").html(terms[int]);
-   terms.splice(int,1);
- }
- ImageAssignment();
-};
 
-let ImageAssignment = function(){
-  for(let card of cards){
-    let card_back = card.getElementsByClassName('card-back-content');
-    console.log(dict.get($(card_back).html()));
-    $(card).find(".card-back").css("background-image", "url(" + dict.get($(card_back).html()) + ")");
-    console.log($(card).find(".card-back").css("background-image"));
+ do{
+   let int = Math.floor(Math.random() * keys.length);
+   let card1 = cards[random.pop()];
+   $(card1).find(".card-back-content").html(keys[int]);
+
+   card2 = cards[random.pop()];
+   ImageAssignment(card2,$(card1).find(".card-back-content").html());
   }
+  while(random.length != 0);
 };
-
+/////////////////////////////////////////////////////////
 $( document ).ready(function() {
   var cardsFlipped = []
 
@@ -51,7 +78,7 @@ $( document ).ready(function() {
     $(card).addClass("complete");
   }
 
-  function cardsMatch(cardList) {
+  function cardsMatch(cardList) { //Adapt this
     if($(cardList[0]).find(".card-back-content").html() == $(cardList[1]).find(".card-back-content").html()){
       return true;
     }

@@ -1,4 +1,4 @@
-- Population via images
+- Checking cards versus keys
 - n # of cards
 - Ending game / restarting
 - Feedback on cards
