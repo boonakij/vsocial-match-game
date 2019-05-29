@@ -64,6 +64,10 @@ window.onload = function(){
 $( document ).ready(function() {
   var cardsFlipped = []
 
+  $("#gameWonModal-button").click(function() {
+    $("#gameWonModal").slideUp(1000);
+  });
+
   function flipCardUp(card) {
     if ($(card).hasClass("flipped")) return;
     $(card).addClass("flipped");
@@ -71,11 +75,19 @@ $( document ).ready(function() {
   }
 
   function flipCardDown(card) {
-    $(card).removeClass("flipped");
+    $(card).find(".cross").fadeIn().delay(1000).fadeOut(function() {
+      $(card).removeClass("flipped");
+    });
+    // $(card).removeClass("flipped");
   }
 
   function markCardComplete(card) {
-    $(card).addClass("complete");
+    $(card).find(".checkmark").fadeIn().delay(1000).fadeOut(function() {
+      $(card).addClass("complete");
+      if (gameWon()) {
+        $("#gameWonModal").slideDown(1000);
+      }
+    });
   }
 
   function cardsMatch(cardList) { //Adapt this
@@ -85,7 +97,14 @@ $( document ).ready(function() {
     else{
       return false;
     }
-};
+  };
+
+  function gameWon() {
+    console.log($(".complete").length);
+    console.log($(".card-outer").length);
+    if ($(".complete").length == $(".card-outer").length) return true;
+    return false
+  }
 
   $('.card-outer').click(function() {
     console.log(cardsFlipped);
