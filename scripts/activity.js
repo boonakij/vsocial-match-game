@@ -1,10 +1,7 @@
 //Created by Boon and Brady
 var cards = document.getElementsByClassName('card-back-content');
 
-//iteration and splicing
-
-
-
+//Terms to populate with
 let terms = []
 for(var i = 0; i < 6; i++){
   terms.push('dog', 'cat');
@@ -12,15 +9,15 @@ for(var i = 0; i < 6; i++){
 
 alert(terms);
 
-
+//Random loading of temrms,
 window.onload = function(){
  for(let card of cards){
    let int = Math.floor(Math.random() * terms.length);
    $(card).html(terms[int]);
    terms.splice(int,1);
-   console.log(card.text);
  }
 };
+
 
 $( document ).ready(function() {
   var cardsFlipped = []
@@ -36,17 +33,22 @@ $( document ).ready(function() {
   }
 
   function cardsMatch(cardList) {
-    // TODO: check if cardlist match
-    return false;
-  }
+    if($(cardList[0]).find(".card-back-content").html() == $(cardList[1]).find(".card-back-content").html()){
+      return true;
+    }
+    else{
+      return false;
+    }
+};
 
   $('.card-outer').click(function() {
+    console.log(cardsFlipped);
     if (cardsFlipped.length < 2) {
       flipCardUp(this);
       setTimeout(function() {
         if (cardsFlipped.length == 2) {
           if (cardsMatch(cardsFlipped)) {
-            // Good condition
+            cardsFlipped = [];
           }
           else {
             flipCardDown(cardsFlipped[0]);
