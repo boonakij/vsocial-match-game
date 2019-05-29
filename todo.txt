@@ -1,0 +1,5 @@
+- Population via images
+- n # of cards
+- Ending game / restarting
+- Feedback on cards
+- Score tracker / card tracker
