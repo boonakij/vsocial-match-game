@@ -14,6 +14,7 @@ console.log(dict);
 console.log(terms);
 
 //Random loading of terms,
+//Random loading of temrms,
 window.onload = function(){
  for(let card of cards){
    let int = Math.floor(Math.random() * terms.length); //HardCode Value)
@@ -46,6 +47,10 @@ $( document ).ready(function() {
     $(card).removeClass("flipped");
   }
 
+  function markCardComplete(card) {
+    $(card).addClass("complete");
+  }
+
   function cardsMatch(cardList) {
     if($(cardList[0]).find(".card-back-content").html() == $(cardList[1]).find(".card-back-content").html()){
       return true;
@@ -62,6 +67,8 @@ $( document ).ready(function() {
       setTimeout(function() {
         if (cardsFlipped.length == 2) {
           if (cardsMatch(cardsFlipped)) {
+            markCardComplete(cardsFlipped[0]);
+            markCardComplete(cardsFlipped[1]);
             cardsFlipped = [];
           }
           else {
