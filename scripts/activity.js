@@ -32,7 +32,4 @@ $( document ).ready(function() {
       }, 2500);
     }
   });
-
-$(object).html(newWord)
-
 });
