@@ -37,6 +37,10 @@ let ImageAssignment = function(){
 $( document ).ready(function() {
   var cardsFlipped = []
 
+  $("#gameWonModal-button").click(function() {
+    $("#gameWonModal").slideUp(1000);
+  });
+
   function flipCardUp(card) {
     if ($(card).hasClass("flipped")) return;
     $(card).addClass("flipped");
@@ -53,6 +57,9 @@ $( document ).ready(function() {
   function markCardComplete(card) {
     $(card).find(".checkmark").fadeIn().delay(1000).fadeOut(function() {
       $(card).addClass("complete");
+      if (gameWon()) {
+        $("#gameWonModal").slideDown(1000);
+      }
     });
   }
 
@@ -63,7 +70,14 @@ $( document ).ready(function() {
     else{
       return false;
     }
-};
+  };
+
+  function gameWon() {
+    console.log($(".complete").length);
+    console.log($(".card-outer").length);
+    if ($(".complete").length == $(".card-outer").length) return true;
+    return false
+  }
 
   $('.card-outer').click(function() {
     console.log(cardsFlipped);
