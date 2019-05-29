@@ -26,6 +26,7 @@ $( document ).ready(function() {
   var cardsFlipped = []
 
   function flipCardUp(card) {
+    if ($(card).hasClass("flipped")) return;
     $(card).addClass("flipped");
     cardsFlipped.push(card);
   }
