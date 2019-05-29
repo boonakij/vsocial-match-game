@@ -18,7 +18,6 @@ $( document ).ready(function() {
   $('.card-outer').click(function() {
     if (cardsFlipped.length < 2) {
       flipCardUp(this);
-      // TODO: Probably need to add time delay here
       setTimeout(function() {
         if (cardsFlipped.length == 2) {
           if (cardsMatch(cardsFlipped)) {
@@ -33,5 +32,7 @@ $( document ).ready(function() {
       }, 2500);
     }
   });
+
+$(object).html(newWord)
 
 });
