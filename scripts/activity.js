@@ -38,7 +38,7 @@ dict.set('dog',"./images/dog.jpeg")
 
 
 // let n = prompt("How many cards would you like to play with?");
-let n = 12 //Hardcode
+let n = 18 //Hardcode
 
 let random = new Array();//Creation of random array to distribute
 for(let i = 0; i < n; i++){
@@ -75,26 +75,51 @@ $( document ).ready(function() {
   });
 
   $("#gameStartModal-button").click(function() {
+    console.log($(window).height());
+    console.log($(window).width());
     $("#gameStartModal").slideUp(1000, function() {
     });
   });
 
 
-  function flipCardUp(card) {
+  function flipCardUp(card, id) {
     if ($(card).hasClass("flipped")) return;
     $(card).addClass("flipped");
+    var cardId = "focused" + id;
+    console.log(cardId);
+    card.setAttribute("id", cardId);
+    var translateX = ($(card).position().left + $(card).width()/2) - ($(window).width() * 0.3);
+    if (id == 2) {
+      translateX = ($(card).position().left + $(card).width()/2) - ($(window).width() * 0.7);
+    }
+    var translateY = ($(window).height()/2) - ($(card).position().top + $(card).height()/2);
+    console.log(translateX);
+    console.log(translateY);
+    var selector = "#" + cardId + " .card-inner";
+    $(selector).css("transform", 'rotateY(180deg) translate(' + translateX + 'px,' + translateY + 'px) scale(2)');
+    // $(card).addClass("focused");
     cardsFlipped.push(card);
   }
 
   function flipCardDown(card) {
     $(card).find(".cross").fadeIn().delay(1000).fadeOut(function() {
       $(card).removeClass("flipped");
+      $("#focused1 .card-inner").removeAttr('style');
+      $("#focused2 .card-inner").removeAttr('style');
+      $("#focused1").removeAttr('style');
+      $("#focused2").removeAttr('style');
+      card.setAttribute("id", "");
+      // $(card).removeClass("focused");
     });
   }
 
   function markCardComplete(card) {
     $(card).find(".checkmark").fadeIn().delay(1000).fadeOut(function() {
       $(card).addClass("complete");
+      $("#focused1 .card-inner").removeAttr('style');
+      $("#focused2 .card-inner").removeAttr('style');
+      $(card).find(".card-inner").css("transform", 'rotateY(180deg)');
+      card.setAttribute("id", "");
       if (gameWon()) {
         $("#turnCountLabel").html(turnCount);
         $("#gameWonModal").slideDown(1000);
@@ -103,11 +128,11 @@ $( document ).ready(function() {
   }
 
   function cardsMatch(cardList) {
-    console.log(dict.get($(cardList[0]).find(".card-back-content").html()))
-    console.log($(cardList[1]).data("key"));
+    // console.log(dict.get($(cardList[0]).find(".card-back-content").html()))
+    // console.log($(cardList[1]).data("key"));
     if(dict.get($(cardList[0]).find(".card-back-content").html()) == $(cardList[1]).data("key")){ //Condense this, reads undefined as true
       if(dict.get($(cardList[1]).find(".card-back-content").html()) == $(cardList[0]).data("key")){
-        console.log("returned true");
+        // console.log("returned true");
         return true;
     }
   }
@@ -117,16 +142,14 @@ $( document ).ready(function() {
   };
 
   function gameWon() {
-    console.log($(".complete").length);
-    console.log($(".card-outer").length);
     if ($(".complete").length == $(".card-outer").length) return true;
     return false
   }
 
   $('.card-outer').click(function() {
-    console.log(cardsFlipped);
+    // console.log(cardsFlipped);
     if (cardsFlipped.length < 2) {
-      flipCardUp(this);
+      flipCardUp(this, cardsFlipped.length + 1);
       setTimeout(function() {
         if (cardsFlipped.length == 2) {
           turnCount++;
@@ -145,3 +168,29 @@ $( document ).ready(function() {
     }
   });
 });
+
+// Source: https://stackoverflow.com/questions/2424191/how-do-i-make-an-element-draggable-in-jquery
+function handle_mousedown(e){
+    window.my_dragging = {};
+    my_dragging.pageX0 = e.pageX;
+    my_dragging.pageY0 = e.pageY;
+    my_dragging.elem = this;
+    my_dragging.offset0 = $(this).offset();
+    function handle_dragging(e){
+        var left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
+        var top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
+        $(my_dragging.elem)
+        .offset({top: top, left: left});
+    }
+    function handle_mouseup(e){
+        $('body')
+        .off('mousemove', handle_dragging)
+        .off('mouseup', handle_mouseup);
+    }
+    $('body')
+    .on('mouseup', handle_mouseup)
+    .on('mousemove', handle_dragging);
+}
+
+$(document).on('mousedown', '#focused1', handle_mousedown);
+$(document).on('mousedown', '#focused2', handle_mousedown);
