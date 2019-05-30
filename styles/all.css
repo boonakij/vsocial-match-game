@@ -9,7 +9,7 @@ html, body {
 .card-container {
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: lightgray;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -23,7 +23,6 @@ html, body {
   height: 14vw;
   margin: 10px;
   perspective: 1000px;
-  border-radius: 5px;
 }
 
 .card-inner {
@@ -50,7 +49,7 @@ html, body {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 5px;
+  border-radius: 1vw;
 }
 
 .card-front {
@@ -115,7 +114,6 @@ html, body {
 }
 
 .modal {
-  display: none;
   position: fixed;
   z-index: 20;
   left: 0;
@@ -128,11 +126,15 @@ html, body {
 }
 
 .modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
+  margin: auto;
+  padding: 120px 10px;
   width: 80%;
-  height: 50%;
+  /* height: 50%; */
 }
 
 /* The Close Button */
@@ -150,6 +152,10 @@ html, body {
   cursor: pointer;
 }
 
+#gameWonModal {
+  display: none;
+}
+
 #gameWonModal-header {
   font-size: 8vw;
   font-weight: bold;
@@ -162,6 +168,29 @@ html, body {
 }
 
 #gameWonModal-button {
+  cursor: pointer;
+  font-size: 4vw;
+  text-align: center;
+  border: 2px solid black;
+  height: 6vw;
+  line-height: 6vw;
+  width: 50%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+#gameStartModal-header {
+  font-size: 7vw;
+  font-weight: bold;
+  text-align: center;
+}
+
+#gameStartModal-description {
+  font-size: 3.5vw;
+  text-align: center;
+}
+
+#gameStartModal-button {
   cursor: pointer;
   font-size: 4vw;
   text-align: center;

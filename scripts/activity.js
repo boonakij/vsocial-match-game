@@ -37,8 +37,8 @@ dict.set('dog',"./images/dog.jpeg")
     .set('cat',"./images/cat.jpeg");
 
 
-let n = prompt("How many cards would you like to play with?");
-n = 12 //Hardcode
+// let n = prompt("How many cards would you like to play with?");
+let n = 12 //Hardcode
 
 let random = new Array();//Creation of random array to distribute
 for(let i = 0; i < n; i++){
@@ -68,8 +68,16 @@ $( document ).ready(function() {
   var cardsFlipped = []
 
   $("#gameWonModal-button").click(function() {
-    $("#gameWonModal").slideUp(1000);
+    $("#gameWonModal").slideUp(1000, function() {
+      location.reload();
+    });
   });
+
+  $("#gameStartModal-button").click(function() {
+    $("#gameStartModal").slideUp(1000, function() {
+    });
+  });
+
 
   function flipCardUp(card) {
     if ($(card).hasClass("flipped")) return;
