@@ -95,18 +95,20 @@ $( document ).ready(function() {
     var translateY = ($(window).height()/2) - ($(card).position().top + $(card).height()/2);
     var selector = "#" + cardId + " .card-inner";
     $(selector).css("transform", 'rotateY(180deg) translate(' + translateX + 'px,' + translateY + 'px) scale(2)');
-    // $(card).addClass("focused");
     cardsFlipped.push(card);
   }
 
   function flipCardDown(card) {
+    var thisTurn = turnCount;
     $(card).find(".cross").fadeIn().delay(1000).fadeOut().delay(readingTimeLength).queue(function() {
-      $(card).removeClass("flipped");
-      $("#focused1 .card-inner").removeAttr('style');
-      $("#focused2 .card-inner").removeAttr('style');
-      $("#focused1").removeAttr('style');
-      $("#focused2").removeAttr('style');
-      card.setAttribute("id", "");
+      if (thisTurn == turnCount) {
+        $(card).removeClass("flipped");
+        $("#focused1 .card-inner").removeAttr('style');
+        $("#focused2 .card-inner").removeAttr('style');
+        $("#focused1").removeAttr('style');
+        $("#focused2").removeAttr('style');
+        card.setAttribute("id", "");
+      }
       $(this).dequeue();
     });
   }
@@ -202,15 +204,6 @@ $( document ).ready(function() {
     }
   });
 
-  $(document).click(function() {
-    if (readingTimeOn) {
-      flipCardsDownNow()
-      $("#readingTimerMeterContainer").fadeOut();
-      clearInterval(timerInterval);
-      readingTimeOn = false;
-    }
-  })
-
   // Source: https://stackoverflow.com/questions/2424191/how-do-i-make-an-element-draggable-in-jquery
   function handle_mousedown(e){
     window.my_dragging = {};
@@ -234,6 +227,9 @@ $( document ).ready(function() {
     .on('mousemove', handle_dragging);
   }
 
+  $(document).on('mousedown', '#focused1', handle_mousedown);
+  $(document).on('mousedown', '#focused2', handle_mousedown);
+
   $(document).on('click', '#focused1', function(e) {
     e.stopPropagation();
   });
@@ -242,7 +238,13 @@ $( document ).ready(function() {
     e.stopPropagation();
   });
 
-  $(document).on('mousedown', '#focused1', handle_mousedown);
-  $(document).on('mousedown', '#focused2', handle_mousedown);
+  $(document).click(function() {
+    if (readingTimeOn) {
+      flipCardsDownNow()
+      $("#readingTimerMeterContainer").fadeOut();
+      clearInterval(timerInterval);
+      readingTimeOn = false;
+    }
+  })
 
 });
