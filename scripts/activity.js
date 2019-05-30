@@ -18,9 +18,7 @@ let ImageAssignment = function(card, key){ //Assignment of image to card based o
     $(card).find(".card-back-content").html('');
     let card_back = card.getElementsByClassName('card-back-content');
     $(card).find(".card-back").css("background-image", "url(" + dict.get(key) + ")");
-    console.log(dict.get(key));
     $(card).data("key", dict.get(key));
-    console.log($(card).data("key"));
 };
 
 let KeyListCreation = function(dict){ //Creation of list of keys based on dictionary
@@ -97,11 +95,13 @@ $( document ).ready(function() {
 
   function cardsMatch(cardList) {
     console.log(dict.get($(cardList[0]).find(".card-back-content").html()))
-    console.log($(cardList[1]).data("key")); //fix this, add key to check URL against. Clean up all code and unnecessary functions
-
-    if(toString(dict.get($(cardList[0]).find(".card-back-content").html())) === toString($(cardList[1]).data("key")) && toString(dict.get($(cardList[1]).find(".card-back-content").html())) === toString($(cardList[0]).data("key"))){
-      return true;
+    console.log($(cardList[1]).data("key"));
+    if(dict.get($(cardList[0]).find(".card-back-content").html()) == $(cardList[1]).data("key")){ //Condense this, reads undefined as true
+      if(dict.get($(cardList[1]).find(".card-back-content").html()) == $(cardList[0]).data("key")){
+        console.log("returned true");
+        return true;
     }
+  }
     else{
       return false;
     }

@@ -1,6 +1,3 @@
-- Checking cards versus keys
-- n # of cards
-- Ending game / restarting
-- Feedback on cards
+- n # of cards / even elements
 - Score tracker / card tracker
-- Scaling of cards
+- clean up code
