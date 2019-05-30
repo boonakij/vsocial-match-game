@@ -4,6 +4,10 @@ html, body {
   margin: 0px;
   padding: 0px;
   font-family: "Segoe UI";
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
 }
 
 .card-container {
@@ -34,11 +38,6 @@ html, body {
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
-/* .card-outer:hover .card-inner {
-  transform: rotateY(180deg);
-} */
-
 .flipped .card-inner {
   transform: rotateY(180deg);
 }
@@ -58,6 +57,7 @@ html, body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 /* Style the back side */

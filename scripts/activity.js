@@ -65,7 +65,8 @@ window.onload = function(){
 /////////////////////////////////////////////////////////
 
 $( document ).ready(function() {
-  var cardsFlipped = []
+  var cardsFlipped = [];
+  var turnCount = 0;
 
   $("#gameWonModal-button").click(function() {
     $("#gameWonModal").slideUp(1000, function() {
@@ -89,13 +90,13 @@ $( document ).ready(function() {
     $(card).find(".cross").fadeIn().delay(1000).fadeOut(function() {
       $(card).removeClass("flipped");
     });
-    // $(card).removeClass("flipped");
   }
 
   function markCardComplete(card) {
     $(card).find(".checkmark").fadeIn().delay(1000).fadeOut(function() {
       $(card).addClass("complete");
       if (gameWon()) {
+        $("#turnCountLabel").html(turnCount);
         $("#gameWonModal").slideDown(1000);
       }
     });
@@ -128,6 +129,7 @@ $( document ).ready(function() {
       flipCardUp(this);
       setTimeout(function() {
         if (cardsFlipped.length == 2) {
+          turnCount++;
           if (cardsMatch(cardsFlipped)) {
             markCardComplete(cardsFlipped[0]);
             markCardComplete(cardsFlipped[1]);
