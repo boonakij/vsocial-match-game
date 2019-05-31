@@ -133,6 +133,9 @@ $( document ).ready(function() {
       $("#focused2").removeAttr('style');
       $(card).find(".card-inner").css("transform", 'rotateY(180deg)');
       card.setAttribute("id", "");
+      cardsFlipped = cardsFlipped.filter(function(elem){
+         return elem != card;
+      });
       if (gameWon()) {
         $("#turnCountLabel").html(turnCount);
         $("#gameWonModal").slideDown(1000);
@@ -186,7 +189,6 @@ $( document ).ready(function() {
           if (cardsMatch(cardsFlipped)) {
             markCardComplete(cardsFlipped[0]);
             markCardComplete(cardsFlipped[1]);
-            cardsFlipped = [];
           }
           else {
             if (!readingTimeOn) {
