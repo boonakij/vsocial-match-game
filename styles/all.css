@@ -107,7 +107,13 @@ html, body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+<<<<<<< HEAD
   /* line-height: 60px */
+=======
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+>>>>>>> Implemented text to text matching
 }
 
 .complete {
