@@ -131,6 +131,7 @@ $( document ).ready(function() {
       $("#focused2 .card-inner").removeAttr('style');
       $("#focused1").removeAttr('style');
       $("#focused2").removeAttr('style');
+      $(".complete").removeAttr("style");
       $(card).find(".card-inner").css("transform", 'rotateY(180deg)');
       card.setAttribute("id", "");
       cardsFlipped = cardsFlipped.filter(function(elem){
