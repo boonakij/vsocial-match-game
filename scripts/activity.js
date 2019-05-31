@@ -14,10 +14,21 @@ function Shuffle(array) {//Shuffle function borrowed from Stack Overflow
   }
 };
 
+function calculateSize(card_back){
+  var length = card_back.length;
+    var spacing = length / .85;
+    var textSize = length / .14;
+  console.log(spacing);
+    $(card_back).css("line-height", spacing);
+    $(card_back).css("font-size", textSize + "px");
+}
+
 let ImageAssignment = function(card, key){ //Assignment of image to card based on key provided
-    $(card).find(".card-back-content").html('');
+    $(card).find(".card-back-content").html(dict.get(key));
     let card_back = card.getElementsByClassName('card-back-content');
-    $(card).find(".card-back").css("background-image", "url(" + dict.get(key) + ")");
+    
+    calculateSize(card_back);
+    
     $(card).data("key", dict.get(key));
 };
 
@@ -33,8 +44,8 @@ var cards= document.getElementsByClassName('card-outer');
 
 //Terms to populate with
 let dict = new Map();
-dict.set('dog',"./images/dog.jpeg")
-    .set('cat',"./images/cat.jpeg");
+dict.set('dog',"this is a dog")
+    .set('cat',"this is a cat naod sndf sonfd ainfle nien fksdn foei nfsl knfio snfe ins eoi fnl ksn foe inf sonsf kldn fioew nfksd lnf");
 
 
 // let n = prompt("How many cards would you like to play with?");
