@@ -14,20 +14,27 @@ function Shuffle(array) {//Shuffle function borrowed from Stack Overflow
   }
 };
 
-function calculateSize(card_back){
-  var length = card_back.length;
-    var spacing = length / .85;
-    var textSize = length / .14;
-  console.log(spacing);
-    $(card_back).css("line-height", spacing);
-    $(card_back).css("font-size", textSize + "px");
-}
+//function calculateSize(card_back){
+//  var length = card_back.length;
+//    var spacing = length / .85;
+//    var textSize = length / .14;
+//  console.log(spacing);
+//    $(card_back).css("line-height", spacing);
+//    $(card_back).css("font-size", textSize + "px");
+//}
 
-let ImageAssignment = function(card, key){ //Assignment of image to card based on key provided
+let AnswerAssignment = function(card, key){ //Assignment of image to card based on key provided
     $(card).find(".card-back-content").html(dict.get(key));
-    let card_back = card.getElementsByClassName('card-back-content');
     
-    calculateSize(card_back);
+    let card_back = card.getElementsByClassName('card-back-content');
+ 
+    var answers = cardNums.get(dict.get(key));
+    $(card).addClass(answers);
+    console.log(answers);
+    
+//    $(card).css('font-size','20px');
+//    $(card_back).css("font-size", "10%");
+    //calculateSize(card_back);
     
     $(card).data("key", dict.get(key));
 };
@@ -44,18 +51,45 @@ var cards= document.getElementsByClassName('card-outer');
 
 //Terms to populate with
 let dict = new Map();
-dict.set('dog',"this is a dog")
-    .set('cat',"this is a cat naod sndf sonfd ainfle nien fksdn foei nfsl knfio snfe ins eoi fnl ksn foe inf sonsf kldn fioew nfksd lnf");
+dict.set('Which of the following is NOT one of the 5 key facial features? Eyes, nose, mouth, forehead, or tilt of head',"Nose")
+    .set("If I were sharing the main idea, staying on topic,and matching my facial expression to what I was saying, would I be the speaker or the listener?", "Speaker")
+    .set("What are at least 2 of the listener’s skills?", "Respond to the speaker and face their direction, use appropriate eye contact, use appropriate body control and proximity, wait for the speaker to finish talking before you respond")
+    .set("What are 2 benefits of learning how to share ideas?", "Problems can be solved and relationships can be developed and maintained")
+    .set("What are 2 ways you can respond to someone who is sharing an idea?", "Verbally (comment or question) or nonverbally (e.g., nod your head)")
+    .set("Which of the following is NOT a clue used to read someone’s emotion? Facial expressions, how smart they are, volume/tone, or body language/gestures", "How smart they are")
+    .set("Why is it important to read the 3 clues?", "So you know what emotion others are showing and how to respond to them")
+    .set("Why is it important that your 3 clues match what you are saying?", "So others can read your emotion")
+    .set("When talking with someone, what are 2 reasons why you should look at his/her face?", "Helps us know his/her emotion and shows the person you are listening");
 
+let cardNums = new Map();
+cardNums.set('Which of the following is NOT one of the 5 key facial features? Eyes, nose, mouth, forehead, or tilt of head', "question1")
+    .set("Nose", "answer1")
+    .set("If I were sharing the main idea, staying on topic,and matching my facial expression to what I was saying, would I be the speaker or the listener?", "question2")
+    .set("Speaker", "answer2")
+    .set("What are at least 2 of the listener’s skills?", "question3")
+    .set("Respond to the speaker and face their direction, use appropriate eye contact, use appropriate body control and proximity, wait for the speaker to finish talking before you respond", "answer3")
+    .set("What are 2 benefits of learning how to share ideas?", "question4")
+    .set("Problems can be solved and relationships can be developed and maintained", "answer4")
+    .set("What are 2 ways you can respond to someone who is sharing an idea?", "question5")
+    .set("Verbally (comment or question) or nonverbally (e.g., nod your head)", "answer5")
+    .set("Which of the following is NOT a clue used to read someone’s emotion? Facial expressions, how smart they are, volume/tone, or body language/gestures", "question6")
+    .set("How smart they are", "answer6")
+    .set("Why is it important to read the 3 clues?", "question7")
+    .set("So you know what emotion others are showing and how to respond to them", "answer7")
+    .set("Why is it important that your 3 clues match what you are saying?", "question8")
+    .set("So others can read your emotion", "answer8")
+    .set("When talking with someone, what are 2 reasons why you should look at his/her face?", "question9")
+    .set("Helps us know his/her emotion and shows the person you are listening", "answer9");
 
 // let n = prompt("How many cards would you like to play with?");
-let n = 18 //Hardcode
+let n = 18; //Hardcode
 
 let random = new Array();//Creation of random array to distribute
 for(let i = 0; i < n; i++){
   random.push(i);
 };
 Shuffle(random);
+console.log(random);
 
 let keys = KeyListCreation(dict); //creation of list of keys
 
@@ -66,9 +100,15 @@ window.onload = function(){
    let int = Math.floor(Math.random() * keys.length);
    let card1 = cards[random.pop()];
    $(card1).find(".card-back-content").html(keys[int]);
+     
+    var key = $(card1).find(".card-back-content").html();
+     
+     var questions = cardNums.get(key);
+    $(card1).addClass(questions);
 
    card2 = cards[random.pop()];
-   ImageAssignment(card2,$(card1).find(".card-back-content").html());
+    
+   AnswerAssignment(card2, key);
   }
   while(random.length != 0);
 };

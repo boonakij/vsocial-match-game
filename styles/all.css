@@ -103,7 +103,6 @@ html, body {
   position: absolute;
   width: 90%;
   /* height: 90%; */
-  font-size: 2vw;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -188,6 +187,78 @@ html, body {
 
 #gameWonModal {
   display: none;
+}
+
+.question1 {
+  font-size: 1.3vw;
+}
+
+.question2 {
+  font-size: 1.15vw;
+}
+
+.question3 {
+  font-size: 1.8vw;
+}
+
+.question4 {
+  font-size: 1.8vw;
+}
+
+.question5 {
+  font-size: 1.4vw;
+}
+
+.question6 {
+  font-size: 1.2vw;
+}
+
+.question7 {
+  font-size: 1.6vw;
+}
+
+.question8 {
+  font-size: 1.5vw;
+}
+
+.question9 {
+  font-size: 1.4vw;
+}
+
+.answer1{
+  font-size: 3vw;
+}
+
+.answer2{
+  font-size: 3vw;
+}
+
+.answer3{
+  font-size: 1vw;
+}
+
+.answer4{
+  font-size: 1.4vw;
+}
+
+.answer5{
+  font-size: 1.4vw;
+}
+
+.answer6{
+  font-size: 3vw;
+}
+
+.answer7{
+  font-size: 1.5vw;
+}
+
+.answer8{
+  font-size: 1.9vw;
+}
+
+.answer9{
+  font-size: 1.5vw;
 }
 
 #gameWonModal-header {
