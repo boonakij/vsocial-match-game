@@ -126,20 +126,22 @@ $( document ).ready(function() {
 
   function markCardComplete(card) {
     $(card).find(".checkmark").fadeIn().delay(1000).fadeOut(function() {
-      $(card).addClass("complete");
-      $("#focused1 .card-inner").removeAttr('style');
-      $("#focused2 .card-inner").removeAttr('style');
-      $("#focused1").removeAttr('style');
-      $("#focused2").removeAttr('style');
-      $(".complete").removeAttr("style");
-      $(card).find(".card-inner").css("transform", 'rotateY(180deg)');
-      card.setAttribute("id", "");
-      cardsFlipped = cardsFlipped.filter(function(elem){
-         return elem != card;
-      });
-      if (gameWon()) {
-        $("#turnCountLabel").html(turnCount);
-        $("#gameWonModal").slideDown(1000);
+      if (!$(card).hasClass("complete")) {
+        $(card).addClass("complete");
+        $("#focused1 .card-inner").removeAttr('style');
+        $("#focused2 .card-inner").removeAttr('style');
+        // $("#focused1").removeAttr('style');
+        // $("#focused2").removeAttr('style');
+        $(".complete").removeAttr("style");
+        $(card).find(".card-inner").css("transform", 'rotateY(180deg)');
+        card.setAttribute("id", "");
+        cardsFlipped = cardsFlipped.filter(function(elem){
+           return elem != card;
+        });
+        if (gameWon()) {
+          $("#turnCountLabel").html(turnCount);
+          $("#gameWonModal").slideDown(1000);
+        }
       }
     });
   }
@@ -151,8 +153,8 @@ $( document ).ready(function() {
       if(dict.get($(cardList[1]).find(".card-back-content").html()) == $(cardList[0]).data("key")){
         // console.log("returned true");
         return true;
+      }
     }
-  }
     else{
       return false;
     }
