@@ -101,13 +101,13 @@ html, body {
 
 .card-back-content {
   position: absolute;
-  width: 50%;
-  height: 60px;
-  font-size: 4vw;
+  width: 90%;
+  /* height: 90%; */
+  font-size: 2vw;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  line-height: 60px
+  /* line-height: 60px */
 }
 
 .complete {
