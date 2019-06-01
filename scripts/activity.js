@@ -30,11 +30,8 @@ let AnswerAssignment = function(card, key){ //Assignment of image to card based 
  
     var answers = cardNums.get(dict.get(key));
     $(card).addClass(answers);
-    console.log(answers);
     
-//    $(card).css('font-size','20px');
-//    $(card_back).css("font-size", "10%");
-    //calculateSize(card_back);
+    console.log(answers);
     
     $(card).data("key", dict.get(key));
 };
@@ -44,6 +41,7 @@ let KeyListCreation = function(dict){ //Creation of list of keys based on dictio
   for(let key of dict.keys()){
     keys.push(key);
   }
+    Shuffle(keys);
   return keys;
 };
 
@@ -83,7 +81,6 @@ cardNums.set('Which of the following is NOT one of the 5 key facial features? Ey
 
 // let n = prompt("How many cards would you like to play with?");
 let n = 18; //Hardcode
-
 let random = new Array();//Creation of random array to distribute
 for(let i = 0; i < n; i++){
   random.push(i);
@@ -92,16 +89,21 @@ Shuffle(random);
 console.log(random);
 
 let keys = KeyListCreation(dict); //creation of list of keys
+Shuffle(keys);
 
 //Random loading of terms,
 window.onload = function(){
 
  do{
-   let int = Math.floor(Math.random() * keys.length);
-   let card1 = cards[random.pop()];
-   $(card1).find(".card-back-content").html(keys[int]);
+//   let int = Math.floor(Math.random() * keys.length);
+     key = keys.pop();
      
-    var key = $(card1).find(".card-back-content").html();
+   let card1 = cards[random.pop()];
+   $(card1).find(".card-back-content").html(key);
+     
+     
+     
+     console.log(random);
      
      var questions = cardNums.get(key);
     $(card1).addClass(questions);
