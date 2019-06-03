@@ -25,14 +25,14 @@ function Shuffle(array) {//Shuffle function borrowed from Stack Overflow
 
 let AnswerAssignment = function(card, key){ //Assignment of image to card based on key provided
     $(card).find(".card-back-content").html(dict.get(key));
-    
+
     let card_back = card.getElementsByClassName('card-back-content');
- 
+
     var answers = cardNums.get(dict.get(key));
     $(card).addClass(answers);
-    
+
     console.log(answers);
-    
+
     $(card).data("key", dict.get(key));
 };
 
@@ -96,15 +96,15 @@ window.onload = function(){
 
  do{
      key = keys.pop();
-     
+
    let card1 = cards[random.pop()];
    $(card1).find(".card-back-content").html(key);
-          
+
      var questions = cardNums.get(key);
     $(card1).addClass(questions);
 
    card2 = cards[random.pop()];
-    
+
    AnswerAssignment(card2, key);
   }
   while(random.length != 0);
@@ -148,7 +148,7 @@ $( document ).ready(function() {
 
   function flipCardDown(card) {
     var thisTurn = turnCount;
-    $(card).find(".cross").fadeIn().delay(1000).fadeOut().delay(readingTimeLength).queue(function() {
+    $(card).find(".cross").stop().fadeIn().delay(1000).fadeOut().delay(readingTimeLength).queue(function() {
       if (thisTurn == turnCount) {
         $(card).removeClass("flipped");
         $("#focused1 .card-inner").removeAttr('style');
