@@ -4,12 +4,17 @@ html, body {
   margin: 0px;
   padding: 0px;
   font-family: "Segoe UI";
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+  overflow-x: hidden;
 }
 
 .card-container {
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: lightgray;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -19,11 +24,12 @@ html, body {
 .card-outer {
   position: relative;
   background-color: transparent;
-  width: 21vw;
-  height: 14vw;
+  /* width: 21vw;
+  height: 14vw; */
+  width: 15vw;
+  height: 10vw;
   margin: 10px;
   perspective: 1000px;
-  border-radius: 5px;
 }
 
 .card-inner {
@@ -35,13 +41,29 @@ html, body {
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
-/* .card-outer:hover .card-inner {
-  transform: rotateY(180deg);
+/* .flipped {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
 } */
 
 .flipped .card-inner {
   transform: rotateY(180deg);
+}
+
+/* .focused {
+  z-index: 5;
+} */
+
+/* .focused .card-inner {
+  transform: rotateY(180deg) scale(2) translate(100px,100px);
+} */
+
+#focused1, #focused2 {
+  z-index: 5;
+  cursor: grab;
 }
 
 /* Position the front and back side */
@@ -50,7 +72,7 @@ html, body {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 5px;
+  border-radius: 1vw;
 }
 
 .card-front {
@@ -59,6 +81,7 @@ html, body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 /* Style the back side */
@@ -78,13 +101,18 @@ html, body {
 
 .card-back-content {
   position: absolute;
-  width: 50%;
-  height: 60px;
-  font-size: 6vw;
+  width: 90%;
+  /* height: 90%; */
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  line-height: 60px
+<<<<<<< HEAD
+  /* line-height: 60px */
+=======
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+>>>>>>> Implemented text to text matching
 }
 
 .complete {
@@ -92,12 +120,16 @@ html, body {
   opacity: 0.5;
 }
 
+.complete .card-inner {
+  transform: none;
+}
+
 .checkmark, .cross {
   display: none;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scaleX(-1);
   width: 50%;
   height: 50%;
   z-index: 10;
@@ -115,7 +147,6 @@ html, body {
 }
 
 .modal {
-  display: none;
   position: fixed;
   z-index: 20;
   left: 0;
@@ -128,11 +159,15 @@ html, body {
 }
 
 .modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
+  margin: auto;
+  padding: 120px 10px;
   width: 80%;
-  height: 50%;
+  /* height: 50%; */
 }
 
 /* The Close Button */
@@ -148,6 +183,82 @@ html, body {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#gameWonModal {
+  display: none;
+}
+
+.question1 {
+  font-size: 1.3vw;
+}
+
+.question2 {
+  font-size: 1.15vw;
+}
+
+.question3 {
+  font-size: 1.8vw;
+}
+
+.question4 {
+  font-size: 1.8vw;
+}
+
+.question5 {
+  font-size: 1.4vw;
+}
+
+.question6 {
+  font-size: 1.2vw;
+}
+
+.question7 {
+  font-size: 1.6vw;
+}
+
+.question8 {
+  font-size: 1.5vw;
+}
+
+.question9 {
+  font-size: 1.4vw;
+}
+
+.answer1{
+  font-size: 3vw;
+}
+
+.answer2{
+  font-size: 3vw;
+}
+
+.answer3{
+  font-size: 1vw;
+}
+
+.answer4{
+  font-size: 1.4vw;
+}
+
+.answer5{
+  font-size: 1.4vw;
+}
+
+.answer6{
+  font-size: 3vw;
+}
+
+.answer7{
+  font-size: 1.5vw;
+}
+
+.answer8{
+  font-size: 1.9vw;
+}
+
+.answer9{
+  font-size: 1.5vw;
 }
 
 #gameWonModal-header {
@@ -171,4 +282,71 @@ html, body {
   width: 50%;
   margin: auto;
   margin-top: 30px;
+}
+
+#gameStartModal-header {
+  font-size: 7vw;
+  font-weight: bold;
+  text-align: center;
+}
+
+#gameStartModal-description {
+  font-size: 3.5vw;
+  text-align: center;
+}
+
+#gameStartModal-button {
+  cursor: pointer;
+  font-size: 4vw;
+  text-align: center;
+  border: 2px solid black;
+  height: 6vw;
+  line-height: 6vw;
+  width: 50%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+#readingTimerMeterContainer {
+  display: none;
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 4vw;
+  background-color: pink;
+  border-radius: 1vw;
+  overflow: hidden;
+}
+
+#readingTimerMeterText {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.5vw;
+  line-height: 4vw;
+}
+
+#readingTimerMeterBackground {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+#readingTimerMeterForeground {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 50%;
+  height: 100%;
+  background-color: #46ad51;
 }
