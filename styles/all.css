@@ -63,6 +63,9 @@ html, body {
 
 #focused1, #focused2 {
   z-index: 5;
+}
+
+#focused1 .card-inner, #focused2 .card-inner {
   cursor: grab;
 }
 
@@ -106,19 +109,12 @@ html, body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-<<<<<<< HEAD
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
-=======
-<<<<<<< HEAD
-  /* line-height: 60px */
-=======
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
->>>>>>> Implemented text to text matching
->>>>>>> feature/textMatching
 }
 
 .complete {

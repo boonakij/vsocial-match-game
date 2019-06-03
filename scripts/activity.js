@@ -278,8 +278,8 @@ $( document ).ready(function() {
     .on('mousemove', handle_dragging);
   }
 
-  $(document).on('mousedown', '#focused1', handle_mousedown);
-  $(document).on('mousedown', '#focused2', handle_mousedown);
+  $(document).on('mousedown', '#focused1 .card-inner', handle_mousedown);
+  $(document).on('mousedown', '#focused2 .card-inner', handle_mousedown);
 
   $(document).on('click', '#focused1', function(e) {
     e.stopPropagation();
