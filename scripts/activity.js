@@ -233,8 +233,10 @@ $( document ).ready(function() {
     if (cardsFlipped.length < 2) {
       flipCardUp(this, cardsFlipped.length + 1);
       setTimeout(function() {
+        if (cardsFlipped.length == 1) {
+          turnCount++;  
+        }
         if (cardsFlipped.length == 2) {
-          turnCount++;
           if (cardsMatch(cardsFlipped)) {
             markCardComplete(cardsFlipped[0]);
             markCardComplete(cardsFlipped[1]);
