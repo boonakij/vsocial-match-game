@@ -93,6 +93,23 @@ Shuffle(keys);
 let GameStart = function(){
   var cards= document.getElementsByClassName('card-outer');
 
+//Random loading of terms,
+window.onload = function(){
+
+ do{
+     key = keys.pop();
+
+   let card1 = cards[random.pop()];
+   $(card1).find(".card-back-content").html(key);
+
+     var questions = cardNums.get(key);
+    $(card1).addClass(questions);
+
+   card2 = cards[random.pop()];
+
+   AnswerAssignment(card2, key);
+  }
+  while(random.length != 0);
 
   let n = prompt("How many cards would you like to play with?");
   n = 12 //Hardcode
@@ -184,7 +201,7 @@ $( document ).ready(function() {
 
   function flipCardDown(card) {
     var thisTurn = turnCount;
-    $(card).find(".cross").fadeIn().delay(1000).fadeOut().delay(readingTimeLength).queue(function() {
+    $(card).find(".cross").stop().fadeIn().delay(1000).fadeOut().delay(readingTimeLength).queue(function() {
       if (thisTurn == turnCount) {
         $(card).removeClass("flipped");
         $("#focused1 .card-inner").removeAttr('style');
@@ -231,8 +248,6 @@ $( document ).ready(function() {
   }
 
   function cardsMatch(cardList) {
-    // console.log(dict.get($(cardList[0]).find(".card-back-content").html()))
-    // console.log($(cardList[1]).data("key"));
     if(dict.get($(cardList[0]).find(".card-back-content").html()) == $(cardList[1]).data("key")){ //Condense this, reads undefined as true
       if(dict.get($(cardList[1]).find(".card-back-content").html()) == $(cardList[0]).data("key")){
         // console.log("returned true");
@@ -271,8 +286,10 @@ $( document ).ready(function() {
     if (cardsFlipped.length < 2) {
       flipCardUp(this, cardsFlipped.length + 1);
       setTimeout(function() {
-        if (cardsFlipped.length == 2) {
+        if (cardsFlipped.length == 1) {
           turnCount++;
+        }
+        if (cardsFlipped.length == 2) {
           if (cardsMatch(cardsFlipped)) {
             markCardComplete(cardsFlipped[0]);
             markCardComplete(cardsFlipped[1]);
@@ -316,8 +333,8 @@ $( document ).ready(function() {
     .on('mousemove', handle_dragging);
   }
 
-  $(document).on('mousedown', '#focused1', handle_mousedown);
-  $(document).on('mousedown', '#focused2', handle_mousedown);
+  $(document).on('mousedown', '#focused1 .card-inner', handle_mousedown);
+  $(document).on('mousedown', '#focused2 .card-inner', handle_mousedown);
 
   $(document).on('click', '#focused1', function(e) {
     e.stopPropagation();
