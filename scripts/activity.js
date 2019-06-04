@@ -85,13 +85,16 @@ let random = new Array();//Creation of random array to distribute
 for(let i = 0; i < n; i++){
   random.push(i);
 };
+
 Shuffle(random);
 console.log(random);
 
 let keys = KeyListCreation(dict); //creation of list of keys
 Shuffle(keys);
+
 let GameStart = function(){
   var cards= document.getElementsByClassName('card-outer');
+};
 
 //Random loading of terms,
 window.onload = function(){
@@ -110,17 +113,19 @@ window.onload = function(){
    AnswerAssignment(card2, key);
   }
   while(random.length != 0);
+};
 
-  let n = prompt("How many cards would you like to play with?");
-  n = 12 //Hardcode
+/*
+let n = prompt("How many cards would you like to play with?");
+n = 12 //Hardcode
 
-  let random = new Array();//Creation of random array to distribute
-  for(let i = 0; i < n; i++){
-    random.push(i);
-  };
-  Shuffle(random);
+let random = new Array();//Creation of random array to distribute
+for(let i = 0; i < n; i++){
+  random.push(i);
+};
+Shuffle(random);
 
-  let keys = KeyListCreation(dict); //creation of list of keys
+let keys = KeyListCreation(dict); //creation of list of keys
 };
 
   //Random loading of terms,
@@ -149,14 +154,13 @@ window.onload = function(){ //gotta fix these syntax errors
       }
       while(random.length != 0);
       }
-}
-
-
+};
 
 let dict = new Map();
 dict.set('dog',"./images/dog.jpeg")
     .set('cat',"./images/cat.jpeg");
 GameStart();
+*/
 /////////////////////////////////////////////////////////
 
 $( document ).ready(function() {
