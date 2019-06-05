@@ -1,4 +1,4 @@
-//Created by Boon and Brady
+//Created by Boon, Brady, Ben 5/29/19
 
 function Shuffle(array) {//Shuffle function borrowed from Stack Overflow
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -83,10 +83,15 @@ let random = new Array();//Creation of random array to distribute
 for(let i = 0; i < n; i++){
   random.push(i);
 };
+
 Shuffle(random);
 
 let keys = KeyListCreation(dict); //creation of list of keys
 Shuffle(keys);
+
+let GameStart = function(){
+  var cards= document.getElementsByClassName('card-outer');
+};
 
 //Random loading of terms,
 window.onload = function(){
@@ -107,6 +112,52 @@ window.onload = function(){
   while(random.length != 0);
 };
 
+/*
+let n = prompt("How many cards would you like to play with?");
+n = 12 //Hardcode
+
+let random = new Array();//Creation of random array to distribute
+for(let i = 0; i < n; i++){
+  random.push(i);
+};
+Shuffle(random);
+
+let keys = KeyListCreation(dict); //creation of list of keys
+};
+
+  //Random loading of terms,
+window.onload = function(){ //gotta fix these syntax errors
+
+   do{
+  //   let int = Math.floor(Math.random() * keys.length);
+      key = keys.pop();
+
+      let card1 = cards[random.pop()];
+      $(card1).find(".card-back-content").html(key);
+      console.log(random);
+      var questions = cardNums.get(key);
+      $(card1).addClass(questions);
+
+      card2 = cards[random.pop()];
+
+      AnswerAssignment(card2, key);
+      do{
+      let int = Math.floor(Math.random() * keys.length);
+      let card1 = cards[random.pop()];
+      $(card1).find(".card-back-content").html(keys[int]);
+
+      card2 = cards[random.pop()];
+      ImageAssignment(card2,$(card1).find(".card-back-content").html());
+      }
+      while(random.length != 0);
+      }
+};
+
+let dict = new Map();
+dict.set('dog',"./images/dog.jpeg")
+    .set('cat',"./images/cat.jpeg");
+GameStart();
+*/
 /////////////////////////////////////////////////////////
 
 $( document ).ready(function() {
@@ -121,6 +172,12 @@ $( document ).ready(function() {
     $("#gameWonModal").slideUp(1000, function() {
       location.reload();
     });
+    $("#gameWonModal").slideUp(1000);
+    for(card in cardsFlipped){
+      flipCardDown(card); //Currently working on this
+    }
+    GameStart();
+
   });
 
   $("#gameStartModal-button").click(function() {

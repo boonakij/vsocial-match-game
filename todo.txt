@@ -1,3 +1,5 @@
 - n # of cards / even elements
 - Score tracker / card tracker
-- clean up code
+- clean up code, especially HTML copy paste
+- # of turns
+- Play Again Button
