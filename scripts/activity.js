@@ -31,8 +31,6 @@ let AnswerAssignment = function(card, key){ //Assignment of image to card based 
     var answers = cardNums.get(dict.get(key));
     $(card).addClass(answers);
 
-    console.log(answers);
-
     $(card).data("key", dict.get(key));
 };
 
@@ -86,7 +84,6 @@ for(let i = 0; i < n; i++){
   random.push(i);
 };
 Shuffle(random);
-console.log(random);
 
 let keys = KeyListCreation(dict); //creation of list of keys
 Shuffle(keys);
@@ -157,6 +154,9 @@ $( document ).ready(function() {
         $("#focused2").removeAttr('style');
         card.setAttribute("id", "");
       }
+      cardsFlipped = cardsFlipped.filter(function(elem){
+         return elem != card;
+      });
       $(this).dequeue();
     });
   }
@@ -168,6 +168,12 @@ $( document ).ready(function() {
     $("#focused2 .card-inner").removeAttr('style');
     $("#focused1").removeAttr('style');
     $("#focused2").removeAttr('style');
+    cardsFlipped = cardsFlipped.filter(function(elem){
+       return elem != document.getElementById("focused1");
+    });
+    cardsFlipped = cardsFlipped.filter(function(elem){
+       return elem != document.getElementById("focused2");
+    });
     document.getElementById("focused1").setAttribute("id", "");
     document.getElementById("focused2").setAttribute("id", "");
   }
@@ -197,7 +203,6 @@ $( document ).ready(function() {
   function cardsMatch(cardList) {
     if(dict.get($(cardList[0]).find(".card-back-content").html()) == $(cardList[1]).data("key")){ //Condense this, reads undefined as true
       if(dict.get($(cardList[1]).find(".card-back-content").html()) == $(cardList[0]).data("key")){
-        // console.log("returned true");
         return true;
       }
     }
@@ -230,12 +235,12 @@ $( document ).ready(function() {
 
   $('.card-outer').click(function() {
     if (readingTimeOn) return;
-    if (cardsFlipped.length < 2) {
+    if (cardsFlipped.length < 2 && !cardsFlipped.includes(this)) {
       flipCardUp(this, cardsFlipped.length + 1);
+      if (cardsFlipped.length == 1) {
+        turnCount++;
+      }
       setTimeout(function() {
-        if (cardsFlipped.length == 1) {
-          turnCount++;  
-        }
         if (cardsFlipped.length == 2) {
           if (cardsMatch(cardsFlipped)) {
             markCardComplete(cardsFlipped[0]);
@@ -250,7 +255,7 @@ $( document ).ready(function() {
             timerInterval = setInterval(updateReadingMeter, 20);
             flipCardDown(cardsFlipped[0]);
             flipCardDown(cardsFlipped[1]);
-            cardsFlipped = []
+            // cardsFlipped = []
           }
         }
       }, 2500);
