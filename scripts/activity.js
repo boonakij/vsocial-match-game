@@ -204,7 +204,7 @@ $( document ).ready(function() {
     var thisTurn = turnCount;
     $(card).find(".cross").stop().fadeIn("slow", function() {
       $(this).fadeOut("slow", function() {
-        $(this).delay(readingTimeLength).queue(function() {
+        $(this).delay(readingTimeLength).fadeOut("slow", function() {
           if (thisTurn == turnCount) {
             $(card).removeClass("flipped");
             $("#focused1 .card-inner").removeAttr('style');
@@ -216,7 +216,7 @@ $( document ).ready(function() {
           cardsFlipped = cardsFlipped.filter(function(elem){
              return elem != card;
           });
-          $(this).dequeue();
+          // $(this).dequeue();
         });
       });
     });
