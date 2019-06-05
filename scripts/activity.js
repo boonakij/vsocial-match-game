@@ -100,19 +100,19 @@ let GameStart = function(){
 window.onload = function(){
 
  do{
-     key = keys.pop();
+   key = keys.pop();
 
    let card1 = cards[random.pop()];
    $(card1).find(".card-back-content").html(key);
 
-     var questions = cardNums.get(key);
+    var questions = cardNums.get(key);
     $(card1).addClass(questions);
 
-   card2 = cards[random.pop()];
+    card2 = cards[random.pop()];
 
-   AnswerAssignment(card2, key);
+    AnswerAssignment(card2, key);
   }
-  while(random.length != 0);
+while(random.length != 0);
 };
 
 /*
