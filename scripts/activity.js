@@ -174,7 +174,7 @@ $( document ).ready(function() {
     });
     $("#gameWonModal").slideUp(1000);
     for(card in cardsFlipped){
-      flipCardDown(card); //Currently working on this
+      //flipCardDown(card); //Currently working on this
     }
     GameStart();
 
@@ -189,6 +189,11 @@ $( document ).ready(function() {
     if ($(card).hasClass("flipped")) return;
     $(card).addClass("flipped");
     var cardId = "focused" + id;
+    var checkExisting = document.getElementById(cardId);
+    if(checkExisting){
+        console.log("I fucked up");
+      checkExisting.removeAttr(cardId);
+    }
     card.setAttribute("id", cardId);
     var translateX = ($(card).position().left + $(card).width()/2) - ($(window).width() * 0.3);
     if (id == 2) {
@@ -200,22 +205,26 @@ $( document ).ready(function() {
     cardsFlipped.push(card);
   }
 
-  function flipCardDown(card) {
+  function flipCardsDown(cardList) {
+      
     var thisTurn = turnCount;
     $(card).find(".cross").stop().fadeIn("slow", function() {
       $(this).fadeOut("slow", function() {
-        $(this).delay(readingTimeLength).fadeOut("slow", function() {
+       $(this).delay(readingTimeLength).fadeOut("slow", function() {
           if (thisTurn == turnCount) {
-            $(card).removeClass("flipped");
+              while(cardsFlipped.length != 0){
+                  card = cardsFlipped.pop();
+                  $(card).removeClass("flipped");
             $("#focused1 .card-inner").removeAttr('style');
             $("#focused2 .card-inner").removeAttr('style');
             $("#focused1").removeAttr('style');
+
             $("#focused2").removeAttr('style');
+            var name = card.getAttribute("id");
             card.setAttribute("id", "");
-          }
-          cardsFlipped = cardsFlipped.filter(function(elem){
-             return elem != card;
-          });
+                  console.log("AHHHHH");
+              }
+        }
           // $(this).dequeue();
         });
       });
@@ -223,6 +232,7 @@ $( document ).ready(function() {
   }
 
   function flipCardsDownNow() {
+    console.log("NOW!");
     $("#focused1").removeClass("flipped");
     $("#focused2").removeClass("flipped");
     $("#focused1 .card-inner").removeAttr('style');
@@ -308,14 +318,15 @@ $( document ).ready(function() {
             markCardComplete(cardsFlipped[1]);
           }
           else {
+              console.log("OH HEY");
             if (!readingTimeOn) {
               $("#readingTimerMeterContainer").fadeIn();
               readingTimeOn = true;
               readingTimeEnd = Date.now() + readingTimeLength;
             }
             timerInterval = setInterval(updateReadingMeter, 20);
-            flipCardDown(cardsFlipped[0]);
-            flipCardDown(cardsFlipped[1]);
+            flipCardsDown(cardsFlipped);
+            //flipCardsDown(cardsFlipped[1]);
             // cardsFlipped = []
           }
         }
