@@ -14,15 +14,6 @@ function Shuffle(array) {//Shuffle function borrowed from Stack Overflow
   }
 };
 
-//function calculateSize(card_back){
-//  var length = card_back.length;
-//    var spacing = length / .85;
-//    var textSize = length / .14;
-//  console.log(spacing);
-//    $(card_back).css("line-height", spacing);
-//    $(card_back).css("font-size", textSize + "px");
-//}
-
 let AnswerAssignment = function(card, key){ //Assignment of image to card based on key provided
     $(card).find(".card-back-content").html(dict.get(key));
 
@@ -112,54 +103,6 @@ window.onload = function(){
   while(random.length != 0);
 };
 
-/*
-let n = prompt("How many cards would you like to play with?");
-n = 12 //Hardcode
-
-let random = new Array();//Creation of random array to distribute
-for(let i = 0; i < n; i++){
-  random.push(i);
-};
-Shuffle(random);
-
-let keys = KeyListCreation(dict); //creation of list of keys
-};
-
-  //Random loading of terms,
-window.onload = function(){ //gotta fix these syntax errors
-
-   do{
-  //   let int = Math.floor(Math.random() * keys.length);
-      key = keys.pop();
-
-      let card1 = cards[random.pop()];
-      $(card1).find(".card-back-content").html(key);
-      console.log(random);
-      var questions = cardNums.get(key);
-      $(card1).addClass(questions);
-
-      card2 = cards[random.pop()];
-
-      AnswerAssignment(card2, key);
-      do{
-      let int = Math.floor(Math.random() * keys.length);
-      let card1 = cards[random.pop()];
-      $(card1).find(".card-back-content").html(keys[int]);
-
-      card2 = cards[random.pop()];
-      ImageAssignment(card2,$(card1).find(".card-back-content").html());
-      }
-      while(random.length != 0);
-      }
-};
-
-let dict = new Map();
-dict.set('dog',"./images/dog.jpeg")
-    .set('cat',"./images/cat.jpeg");
-GameStart();
-*/
-/////////////////////////////////////////////////////////
-
 $( document ).ready(function() {
   var cardsFlipped = [];
   var turnCount = 0;
@@ -174,7 +117,7 @@ $( document ).ready(function() {
     });
     $("#gameWonModal").slideUp(1000);
     for(card in cardsFlipped){
-      //flipCardDown(card); //Currently working on this
+      flipCardDown(card); //Currently working on this
     }
     GameStart();
 
@@ -205,31 +148,28 @@ $( document ).ready(function() {
     cardsFlipped.push(card);
   }
 
-  function flipCardsDown(cardList) {
-      
-    var thisTurn = turnCount;
-    $(card).find(".cross").stop().fadeIn("slow", function() {
-      $(this).fadeOut("slow", function() {
-       $(this).delay(readingTimeLength).fadeOut("slow", function() {
-          if (thisTurn == turnCount) {
-              while(cardsFlipped.length != 0){
-                  card = cardsFlipped.pop();
-                  $(card).removeClass("flipped");
-            $("#focused1 .card-inner").removeAttr('style');
-            $("#focused2 .card-inner").removeAttr('style');
-            $("#focused1").removeAttr('style');
+  function flipCardsDown(card) {
+      while(cardsFlipped.length != 0){
+          card = cardsFlipped.pop();
+          $(card).removeClass("flipped");
+    $("#focused1 .card-inner").removeAttr('style');
+    $("#focused2 .card-inner").removeAttr('style');
+    $("#focused1").removeAttr('style');
 
-            $("#focused2").removeAttr('style');
-            var name = card.getAttribute("id");
-            card.setAttribute("id", "");
-                  console.log("AHHHHH");
+    $("#focused2").removeAttr('style');
+    var name = card.getAttribute("id");
+    card.setAttribute("id", "");
+          console.log("AHHHHH");
               }
         }
-          // $(this).dequeue();
+
+    function checkCards(card){
+    $(card).find(".cross").stop().fadeIn("slow", function() {
+      $(this).fadeOut("slow", function() {
         });
-      });
-    });
-  }
+        });
+    }
+  
 
   function flipCardsDownNow() {
     console.log("NOW!");
@@ -298,6 +238,7 @@ $( document ).ready(function() {
       $("#readingTimerMeterContainer").fadeOut();
       readingTimeOn = false;
       readingTimeEnd = null;
+        flipCardsDown(cardsFlipped);
       return false;
     }
   }
@@ -325,9 +266,8 @@ $( document ).ready(function() {
               readingTimeEnd = Date.now() + readingTimeLength;
             }
             timerInterval = setInterval(updateReadingMeter, 20);
-            flipCardsDown(cardsFlipped);
-            //flipCardsDown(cardsFlipped[1]);
-            // cardsFlipped = []
+            checkCards(cardsFlipped[0]);
+            checkCards(cardsFlipped[1]);
           }
         }
       }, 2500);
