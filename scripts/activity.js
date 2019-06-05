@@ -202,19 +202,23 @@ $( document ).ready(function() {
 
   function flipCardDown(card) {
     var thisTurn = turnCount;
-    $(card).find(".cross").stop().fadeIn().delay(1000).fadeOut().delay(readingTimeLength).queue(function() {
-      if (thisTurn == turnCount) {
-        $(card).removeClass("flipped");
-        $("#focused1 .card-inner").removeAttr('style');
-        $("#focused2 .card-inner").removeAttr('style');
-        $("#focused1").removeAttr('style');
-        $("#focused2").removeAttr('style');
-        card.setAttribute("id", "");
-      }
-      cardsFlipped = cardsFlipped.filter(function(elem){
-         return elem != card;
+    $(card).find(".cross").stop().fadeIn("slow", function() {
+      $(this).fadeOut("slow", function() {
+        $(this).delay(readingTimeLength).queue(function() {
+          if (thisTurn == turnCount) {
+            $(card).removeClass("flipped");
+            $("#focused1 .card-inner").removeAttr('style');
+            $("#focused2 .card-inner").removeAttr('style');
+            $("#focused1").removeAttr('style');
+            $("#focused2").removeAttr('style');
+            card.setAttribute("id", "");
+          }
+          cardsFlipped = cardsFlipped.filter(function(elem){
+             return elem != card;
+          });
+          $(this).dequeue();
+        });
       });
-      $(this).dequeue();
     });
   }
 

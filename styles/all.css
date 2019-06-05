@@ -92,7 +92,7 @@ html, body {
   position: relative;
   color: white;
   transform: rotateY(180deg);
-  background-image: url("../images/grass.jpg");
+  background-image: url("../images/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
