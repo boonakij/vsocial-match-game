@@ -3,3 +3,7 @@
 - clean up code, especially HTML copy paste
 - # of turns
 - Play Again Button
+
+
+PROBLEMS:
+- #focused1 and #focused2 labeled properly, timer doesn't pop up (probably because cardsFlipped not correct);

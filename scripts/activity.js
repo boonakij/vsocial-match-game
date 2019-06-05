@@ -189,6 +189,9 @@ $( document ).ready(function() {
     if ($(card).hasClass("flipped")) return;
     $(card).addClass("flipped");
     var cardId = "focused" + id;
+    if (document.getElementById(cardId)) {
+      document.getElementById(cardId).setAttribute("id", "");
+    }
     card.setAttribute("id", cardId);
     var translateX = ($(card).position().left + $(card).width()/2) - ($(window).width() * 0.3);
     if (id == 2) {
@@ -201,16 +204,17 @@ $( document ).ready(function() {
   }
 
   function flipCardDown(card) {
+    console.log("flipping card down");
     var thisTurn = turnCount;
     $(card).find(".cross").stop().fadeIn("slow", function() {
       $(this).fadeOut("slow", function() {
         $(this).delay(readingTimeLength).fadeOut("slow", function() {
           if (thisTurn == turnCount) {
             $(card).removeClass("flipped");
-            $("#focused1 .card-inner").removeAttr('style');
-            $("#focused2 .card-inner").removeAttr('style');
-            $("#focused1").removeAttr('style');
-            $("#focused2").removeAttr('style');
+            $(card).find(".card-inner").removeAttr('style');
+            // $("#focused2 .card-inner").removeAttr('style');
+            $(card).removeAttr('style');
+            // $("#focused2").removeAttr('style');
             card.setAttribute("id", "");
           }
           cardsFlipped = cardsFlipped.filter(function(elem){
@@ -223,6 +227,7 @@ $( document ).ready(function() {
   }
 
   function flipCardsDownNow() {
+    console.log("flipping cards down now");
     $("#focused1").removeClass("flipped");
     $("#focused2").removeClass("flipped");
     $("#focused1 .card-inner").removeAttr('style');
@@ -292,6 +297,8 @@ $( document ).ready(function() {
     }
   }
 
+  // function exterminateBugs() {}
+
   var timerInterval = null;
 
   $('.card-outer').click(function() {
@@ -350,20 +357,25 @@ $( document ).ready(function() {
   $(document).on('mousedown', '#focused2 .card-inner', handle_mousedown);
 
   $(document).on('click', '#focused1', function(e) {
+    console.log("STOPPED PROPOGATION 1");
     e.stopPropagation();
   });
 
   $(document).on('click', '#focused2', function(e) {
+    console.log("STOPPED PROPOGATION 2");
     e.stopPropagation();
   });
 
   $(document).click(function() {
+    console.log("clicked document");
     if (readingTimeOn) {
+      console.log("clicked document and reading time on");
       flipCardsDownNow()
       $("#readingTimerMeterContainer").fadeOut();
       clearInterval(timerInterval);
       readingTimeOn = false;
     }
+    // console.log(cardsFlipped);
   })
 
 });
