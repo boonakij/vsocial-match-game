@@ -157,6 +157,7 @@ $( document ).ready(function() {
     $("#focused1").removeAttr('style');
 
     $("#focused2").removeAttr('style');
+    card.setAttribute("clicked", "false");
     var name = card.getAttribute("id");
     card.setAttribute("id", "");
           console.log("AHHHHH");
@@ -164,12 +165,15 @@ $( document ).ready(function() {
         }
 
     function checkCards(card){
-    $(card).find(".cross").stop().fadeIn("slow", function() {
-      $(this).fadeOut("slow", function() {
+      if (!$(card).find('.cross').is(':animated') && !(card.getAttribute("clicked")=="true")) {
+        card.setAttribute("clicked", "true")
+        $(card).find(".cross").stop().fadeIn("slow", function() {
+          $(this).fadeOut("slow", function() {
+          });
         });
-        });
+      }
     }
-  
+
 
   function flipCardsDownNow() {
     console.log("NOW!");
@@ -179,6 +183,9 @@ $( document ).ready(function() {
     $("#focused2 .card-inner").removeAttr('style');
     $("#focused1").removeAttr('style');
     $("#focused2").removeAttr('style');
+    for (var i = 0; i < cardsFlipped.length; i++) {
+      cardsFlipped[i].setAttribute("clicked", "false");
+    }
     cardsFlipped = cardsFlipped.filter(function(elem){
        return elem != document.getElementById("focused1");
     });
