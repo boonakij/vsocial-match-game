@@ -104,7 +104,6 @@ window.onload = function(){
 };
 
 $( document ).ready(function() {
-  let clicked = false;
   var cardsFlipped = [];
   var turnCount = 0;
   var readingTimeOn = false;
@@ -254,35 +253,31 @@ $( document ).ready(function() {
   var timerInterval = null;
 
   $('.card-outer').click(function() {
-    if(clicked == false){
-      clicked = true;
-      if (readingTimeOn) return;
-      if (cardsFlipped.length < 2 && !cardsFlipped.includes(this)) {
-        flipCardUp(this, cardsFlipped.length + 1);
-        if (cardsFlipped.length == 1) {
-          turnCount++;
-        }
-        setTimeout(function() {
-          if (cardsFlipped.length == 2) {
-            if (cardsMatch(cardsFlipped)) {
-              markCardComplete(cardsFlipped[0]);
-              markCardComplete(cardsFlipped[1]);
-            }
-            else {
-                console.log("OH HEY");
-              if (!readingTimeOn) {
-                $("#readingTimerMeterContainer").fadeIn();
-                readingTimeOn = true;
-                readingTimeEnd = Date.now() + readingTimeLength;
-              }
-              timerInterval = setInterval(updateReadingMeter, 20);
-              checkCards(cardsFlipped[0]);
-              checkCards(cardsFlipped[1]);
-            }
-          }
-        }, 2500);
+    if (readingTimeOn) return;
+    if (cardsFlipped.length < 2 && !cardsFlipped.includes(this)) {
+      flipCardUp(this, cardsFlipped.length + 1);
+      if (cardsFlipped.length == 1) {
+        turnCount++;
       }
-    }
+      setTimeout(function() {
+        if (cardsFlipped.length == 2) {
+          if (cardsMatch(cardsFlipped)) {
+            markCardComplete(cardsFlipped[0]);
+            markCardComplete(cardsFlipped[1]);
+          }
+          else {
+              console.log("OH HEY");
+            if (!readingTimeOn) {
+              $("#readingTimerMeterContainer").fadeIn();
+              readingTimeOn = true;
+              readingTimeEnd = Date.now() + readingTimeLength;
+            }
+            timerInterval = setInterval(updateReadingMeter, 20);
+            checkCards(cardsFlipped[0]);
+            checkCards(cardsFlipped[1]);
+          }
+        }
+      }, 2500);
     }
   });
 
