@@ -134,8 +134,7 @@ $( document ).ready(function() {
     var cardId = "focused" + id;
     var checkExisting = document.getElementById(cardId);
     if(checkExisting){
-        console.log("I fucked up");
-      checkExisting.removeAttr(cardId);
+      $(checkExisting).removeAttr(cardId);
     }
     card.setAttribute("id", cardId);
     var translateX = ($(card).position().left + $(card).width()/2) - ($(window).width() * 0.3);
@@ -160,8 +159,7 @@ $( document ).ready(function() {
     card.setAttribute("clicked", "false");
     var name = card.getAttribute("id");
     card.setAttribute("id", "");
-          console.log("AHHHHH");
-              }
+      }
         }
 
     function checkCards(card){
@@ -176,7 +174,6 @@ $( document ).ready(function() {
 
 
   function flipCardsDownNow() {
-    console.log("NOW!");
     $("#focused1").removeClass("flipped");
     $("#focused2").removeClass("flipped");
     $("#focused1 .card-inner").removeAttr('style');
@@ -266,7 +263,6 @@ $( document ).ready(function() {
             markCardComplete(cardsFlipped[1]);
           }
           else {
-              console.log("OH HEY");
             if (!readingTimeOn) {
               $("#readingTimerMeterContainer").fadeIn();
               readingTimeOn = true;
