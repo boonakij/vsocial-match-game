@@ -104,6 +104,7 @@ window.onload = function(){
 };
 
 $( document ).ready(function() {
+  let clicked = false;
   var cardsFlipped = [];
   var turnCount = 0;
   var readingTimeOn = false;
@@ -169,7 +170,7 @@ $( document ).ready(function() {
         });
         });
     }
-  
+
 
   function flipCardsDownNow() {
     console.log("NOW!");
@@ -212,7 +213,7 @@ $( document ).ready(function() {
   }
 
   function cardsMatch(cardList) {
-    if(dict.get($(cardList[0]).find(".card-back-content").html()) == $(cardList[1]).data("key")){ //Condense this, reads undefined as true
+    if(dict.get($(cardList[0]).find(".card-back-content").html()) == $(cardList[1]).data("key")){
       if(dict.get($(cardList[1]).find(".card-back-content").html()) == $(cardList[0]).data("key")){
         return true;
       }
@@ -246,31 +247,35 @@ $( document ).ready(function() {
   var timerInterval = null;
 
   $('.card-outer').click(function() {
-    if (readingTimeOn) return;
-    if (cardsFlipped.length < 2 && !cardsFlipped.includes(this)) {
-      flipCardUp(this, cardsFlipped.length + 1);
-      if (cardsFlipped.length == 1) {
-        turnCount++;
-      }
-      setTimeout(function() {
-        if (cardsFlipped.length == 2) {
-          if (cardsMatch(cardsFlipped)) {
-            markCardComplete(cardsFlipped[0]);
-            markCardComplete(cardsFlipped[1]);
-          }
-          else {
-              console.log("OH HEY");
-            if (!readingTimeOn) {
-              $("#readingTimerMeterContainer").fadeIn();
-              readingTimeOn = true;
-              readingTimeEnd = Date.now() + readingTimeLength;
-            }
-            timerInterval = setInterval(updateReadingMeter, 20);
-            checkCards(cardsFlipped[0]);
-            checkCards(cardsFlipped[1]);
-          }
+    if(clicked == false){
+      clicked = true;
+      if (readingTimeOn) return;
+      if (cardsFlipped.length < 2 && !cardsFlipped.includes(this)) {
+        flipCardUp(this, cardsFlipped.length + 1);
+        if (cardsFlipped.length == 1) {
+          turnCount++;
         }
-      }, 2500);
+        setTimeout(function() {
+          if (cardsFlipped.length == 2) {
+            if (cardsMatch(cardsFlipped)) {
+              markCardComplete(cardsFlipped[0]);
+              markCardComplete(cardsFlipped[1]);
+            }
+            else {
+                console.log("OH HEY");
+              if (!readingTimeOn) {
+                $("#readingTimerMeterContainer").fadeIn();
+                readingTimeOn = true;
+                readingTimeEnd = Date.now() + readingTimeLength;
+              }
+              timerInterval = setInterval(updateReadingMeter, 20);
+              checkCards(cardsFlipped[0]);
+              checkCards(cardsFlipped[1]);
+            }
+          }
+        }, 2500);
+      }
+    }
     }
   });
 
