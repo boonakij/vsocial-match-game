@@ -21,15 +21,15 @@ html, body {
   justify-content: center;
 }
 
-.card-outer {
+.card-outer, .blank-card-outer {
   position: relative;
   background-color: transparent;
   /* width: 21vw;
   height: 14vw; */
-  width: 15vw;
+  width: 13vw;
   height: 10vw;
-  margin: 10px;
-  perspective: 1000px;
+  margin: 6px;
+  perspective: 1000px;  
 }
 
 .card-inner {
